@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """Script that returns information"""
 
-from api.v1.views import app_views
 from flask import jsonify
-from models import storage, classes
+from api.v1.views import app_views
+from models import storage
 
 
 # created for Task_4. Status of your API
@@ -11,9 +11,9 @@ from models import storage, classes
 # that returns a JSON: "status": "OK"
 # curl -X GET http://0.0.0.0:5000/api/v1/status
 @app_views.route('/status', methods=['GET'])
-def get_status():
-    """Endpoint to return the status as JSON"""
-    return jsonify({"status": "OK"})
+def status():
+    """ Returns a JSON: "status": "OK """
+    return jsonify(status="OK")
 
 
 
