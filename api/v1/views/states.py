@@ -48,7 +48,7 @@ def delete_state(state_id):
     return jsonify({}), 200
 
 
-# Creates a State: POST /api/v1/states
+# Creates a State using POST /api/v1/states
 @app_views.route("/states", methods=["POST"], strict_slashes=False)
 def create_state():
     """Creates a State using Flask to transform
@@ -66,8 +66,8 @@ def create_state():
 
 
 # Updates a State object: PUT /api/v1/states/<state_id>
-@app_views.route("/states", methods=["PUT"], strict_slashes=False)
-def update_state():
+@app_views.route("/states/<state_id>" methods=["PUT"], strict_slashes=False)
+def update_state(state_id):
     """Update a State object base in <state_id>"""
     # retrieves state data from dict and save in variable "state_request"
     state_request = request.get_json()
