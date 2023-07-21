@@ -5,6 +5,7 @@ from api.v1.views import app_views
 from flask import jsonify
 from models import storage, classes
 
+
 # created for Task_4. Status of your API
 @app_views.route('/status', methods=['GET'])
 def get_status():
