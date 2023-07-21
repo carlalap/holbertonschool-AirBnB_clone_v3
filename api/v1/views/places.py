@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""Flask application for Place class/entity"""
+"""Script for Place objects that handles
+all default RESTFul API actions:"""
 from api.v1.views import app_views
 from models import storage
 from models.city import City
@@ -8,33 +9,33 @@ from models.user import User
 from flask import jsonify, abort, request
 
 
-@app_views.route("/cities/<city_id>/places",
-                 methods=["GET"], strict_slashes=False)
-def retrieves_all_places(city_id):
-    """Returns the list of all Place objects"""
+# Retrieves the list of all Place objects of a City:
+# GET /api/v1/cities/<city_id>/places
+@app_views.route("/cities/<city_id>/places", methods=["GET"],
+                 strict_slashes=False)
+def get_places_by_city(city_id):
+    """Retrieves the list of all place objects by city"""
     city = storage.get(City, city_id)
     if not city:
         abort(404)
     places = city.places
-    places_list = []
-    for place in places:
-        places_list.append(place.to_dict())
-    return jsonify(places_list)
+    return jsonify([place.to_dict() for place in places])
 
 
+# Retrieves a Place object. : GET /api/v1/places/<place_id>
 @app_views.route("/places/<place_id>", methods=["GET"], strict_slashes=False)
 def get_place(place_id):
-    """Returns an object by id"""
+    """Retrieves a Place object."""
     place = storage.get(Place, place_id)
     if not place:
         abort(404)
     return jsonify(place.to_dict())
 
 
+# Deletes a Place object: DELETE /api/v1/places/<place_id>
 @app_views.route("/places/<place_id>", methods=["DELETE"],
                  strict_slashes=False)
 def delete_place(place_id):
-    """Deletes an object by id"""
     place = storage.get(Place, place_id)
     if not place:
         abort(404)
@@ -43,17 +44,18 @@ def delete_place(place_id):
     return jsonify({}), 200
 
 
-@app_views.route("/cities/<city_id>/places",
-                 methods=["POST"], strict_slashes=False)
+# Creates a Place: POST /api/v1/cities/<city_id>/places
+@app_views.route("/cities/<city_id>/places", methods=["POST"],
+                 strict_slashes=False)
 def create_place(city_id):
-    """Creates an object"""
-    place_data = request.get_json()
-    if not place_data:
-        abort(400, "Not a JSON")
-
+    """Create a new place object"""
     city = storage.get(City, city_id)
     if not city:
         abort(404)
+
+    place_data = request.get_json()
+    if not place_data:
+        abort(400, "Not a JSON")
 
     if "user_id" not in place_data.keys():
         abort(400, "Missing user_id")
@@ -70,6 +72,7 @@ def create_place(city_id):
     return jsonify(place.to_dict()), 201
 
 
+# Updates a Place object: PUT /api/v1/places/<place_id>
 @app_views.route("/places/<place_id>", methods=["PUT"], strict_slashes=False)
 def update_place(place_id):
     """Updates an object"""
