@@ -9,7 +9,7 @@ from models.user import User
 from flask import jsonify, abort, request
 
 
-@app_views.route("/places/<place_id>/reviews", methods=["GET"],
+@app_views.route("/api/v1/places/<place_id>/reviews", methods=["GET"],
                  strict_slashes=False)
 def retrieves_all_reviews(place_id):
     """Get reviews for a specified place"""
