@@ -7,13 +7,16 @@ from models import storage
 from api.v1.views import app_views
 
 
+"""Flask start"""
 app = Flask(__name__)
 
+"""Register the blueprint app_views
+for Flask instance"""
 app.register_blueprint(app_views)
 
 
 @app.teardown_appcontext
-def teardown_appcontext(error):
+def teardown(exception):
     """Method to handle that calls storage.close()"""
     storage.close()
 
