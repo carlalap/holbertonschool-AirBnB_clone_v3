@@ -73,8 +73,8 @@ class FileStorage:
     def get(self, cls, id):
         """
         Retrieve one object based on the class and its ID,
-        or None if not found.
-	    """
+        or None if not found
+        """
         key = "{}.{}".format(cls.__name__, id)
         return self.__objects.get(key)
 
