@@ -24,7 +24,7 @@ def retrieves_all_reviews(place_id):
 
 
 @app_views.route("/reviews/<review_id>", methods=["GET"], strict_slashes=False)
-def get_reviews(review_id):
+def get_review(review_id):
     """Returns an object by id"""
     review = storage.get(Review, review_id)
     if not review:
@@ -41,7 +41,7 @@ def delete_review(review_id):
         abort(404)
     storage.delete(review)
     storage.save()
-    return (jsonify({})), 200
+    return jsonify({}), 200
 
 
 @app_views.route("/places/<place_id>/reviews", methods=["POST"],
@@ -68,6 +68,8 @@ def post_review(place_id):
 
     review_data["place_id"] = place_id
     new_review = Review(**review_data)
+    storage.new(new_review)
+    storage.save()
     return jsonify(new_review.to_dict()), 201
 
 
