@@ -17,12 +17,12 @@ def status():
 
 
 # create for task 5
-# @app_views.route('/api/v1/stats', methods=['GET'])
-# def get_stats():
-#    """Retrieve the number of each objects by type"""
-#    stats = {}
-#    for cls_name, cls in classes.items():
-#        count = storage.count(cls)
-#        stats[cls_name] = count
-#
-#    return jsonify(stats)
+@app_views.route('/api/v1/stats', methods=['GET'])
+def get_stats():
+    """Retrieve the number of each objects by type"""
+    stats = {}
+    for cls_name, cls in classes.items():
+        count = storage.count(cls)
+        stats[cls_name] = count
+
+    return jsonify(stats)
