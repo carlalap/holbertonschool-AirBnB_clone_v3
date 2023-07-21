@@ -66,9 +66,9 @@ def create_state():
 
 
 # Updates a State object: PUT /api/v1/states/<state_id>
-@app_views.route("/states/<state_id>" methods=["PUT"], strict_slashes=False)
+@app_views.route("/states/<int:state_id>", methods=["PUT"], strict_slashes=False)
 def update_state(state_id):
-    """Update a State object base in <state_id>"""
+    """Update a State object based on <state_id>"""
     # retrieves state data from dict and save in variable "state_request"
     state_request = request.get_json()
     state = storage.get(State, state_id)
