@@ -1,13 +1,12 @@
 #!/usr/bin/python3
 """Script for Review objects that handles
 all default RESTFul API actions:"""
-
 from api.v1.views import app_views
-from flask import abort, jsonify, make_response, request
 from models import storage
+from models.place import Place
 from models.review import Review
 from models.user import User
-from models.place import Place
+from flask import jsonify, abort, request
 
 
 @app_views.route("/places/<place_id>/reviews", methods=["GET"],
@@ -41,7 +40,7 @@ def delete_review(review_id):
     review = storage.get(Review, review_id)
     if review is None:
         abort(404)
-    review.delete()
+    storage.delete(review)
     storage.save()
     return (jsonify({})), 200
 
