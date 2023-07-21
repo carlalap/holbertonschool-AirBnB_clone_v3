@@ -61,7 +61,7 @@ def create_state():
 
 
 # Updates a State object: PUT /api/v1/states/<state_id>
-@app_views.route("/states/<int:state_id>", methods=["PUT"],
+@app_views.route("/states/<state_id>", methods=["PUT"],
                  strict_slashes=False)
 def update_state(state_id):
     """Update a State object based on <state_id>"""
