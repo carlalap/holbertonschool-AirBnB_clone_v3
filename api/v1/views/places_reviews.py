@@ -24,7 +24,7 @@ def retrieves_all_reviews(place_id):
 
 
 @app_views.route("/reviews/<review_id>", methods=["GET"], strict_slashes=False)
-def get_review(review_id):
+def get_review_by_id(review_id):
     """Returns an object by id"""
     review = storage.get(Review, review_id)
     if not review:
