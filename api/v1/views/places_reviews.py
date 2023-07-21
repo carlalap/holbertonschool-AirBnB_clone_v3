@@ -11,7 +11,7 @@ from flask import jsonify, abort, request
 
 @app_views.route("/places/<place_id>/reviews", methods=["GET"],
                  strict_slashes=False)
-def get_reviews(place_id):
+def retrieves_all_reviews(place_id):
     """Get reviews for a specified place"""
     place = storage.get(Place, place_id)
     if not place:
