@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """ Script that starts an API! """
 from flask import Flask, jsonify
-from os import
+import os 
+import models
 from models import storage
 from api.v1.views import app_views
 
