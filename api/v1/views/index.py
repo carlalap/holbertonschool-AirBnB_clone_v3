@@ -12,9 +12,9 @@ from models import storage, classes
 # curl -X GET http://0.0.0.0:5000/api/v1/status
 @app_views.route('/status', methods=['GET'])
 def get_status():
-    """Endpoint to return the status as JSON
-    status_data = {"status": "OK"}"""
-    return jsonify(status_data)
+    """Endpoint to return the status as JSON"""
+    return jsonify({"status": "OK"})
+
 
 
 # create for task 5
