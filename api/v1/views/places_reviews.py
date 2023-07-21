@@ -12,9 +12,9 @@ from flask import jsonify, abort, request
 @app_views.route("/places/<place_id>/reviews", methods=["GET"],
                  strict_slashes=False)
 def get_reviews(place_id):
-    """get reviews for a specified place"""
+    """Get reviews for a specified place"""
     place = storage.get(Place, place_id)
-    if place is None:
+    if not place:
         abort(404)
     reviews = place.reviews
     reviews_list = []
@@ -23,12 +23,11 @@ def get_reviews(place_id):
     return jsonify(reviews_list)
 
 
-@app_views.route("/reviews/<review_id>", methods=["GET"],
-                 strict_slashes=False)
-def get_review(review_id):
-    """get review information for specified review"""
+@app_views.route("/reviews/<review_id>", methods=["GET"], strict_slashes=False)
+def get_reviews(review_id):
+    """Returns an object by id"""
     review = storage.get(Review, review_id)
-    if review is None:
+    if not review:
         abort(404)
     return jsonify(review.to_dict())
 
@@ -48,7 +47,7 @@ def delete_review(review_id):
 @app_views.route("/places/<place_id>/reviews", methods=["POST"],
                  strict_slashes=False)
 def post_review(place_id):
-    """create a new review"""
+    """create a new review objects"""
     review_data = request.get_json()
     if not review_data:
         abort(400, 'Not a JSON')
