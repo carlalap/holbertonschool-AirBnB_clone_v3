@@ -4,7 +4,7 @@ all default RESTFul API actions:"""
 from api.v1.views import app_views
 from models import storage
 from models.state import State
-from flask import jsonify, abort, request
+from flask import jsonify, request, abort
 
 
 # Retrieves the list of all State objects - GET /api/v1/states
