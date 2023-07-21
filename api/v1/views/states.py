@@ -1,19 +1,14 @@
 #!/usr/bin/python3
 """Script for State objects that handles
 all default RESTFul API actions:"""
-
-import models
-from flask import Blueprint, request, jsonify, abort
+from api.v1.views import app_views
+from models import storage
 from models.state import State
-
-# Create a Blueprint for the states view
-# create a variable app_views which is an instance of
-# Blueprint (url prefix must be /api/v1)
-app_views = Blueprint('app_views', __name__, url_prefix='/api/v1')
+from flask import jsonify, abort, request
 
 
 # Retrieves the list of all State objects - GET /api/v1/states
-@app_views.route("/states", methods=[GET], strict_slashes=False)
+@app_views.route("/states", methods=["GET"], strict_slashes=False)
 def retrieves_allstate():
     """Retrieves the list of all State objects"""
     states = storage.all(State).values()
@@ -66,7 +61,8 @@ def create_state():
 
 
 # Updates a State object: PUT /api/v1/states/<state_id>
-@app_views.route("/states/<int:state_id>", methods=["PUT"], strict_slashes=False)
+@app_views.route("/states/<int:state_id>", methods=["PUT"],
+                 strict_slashes=False)
 def update_state(state_id):
     """Update a State object based on <state_id>"""
     # retrieves state data from dict and save in variable "state_request"
