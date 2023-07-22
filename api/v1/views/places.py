@@ -18,7 +18,10 @@ def get_places_by_city(city_id):
     if not city:
         abort(404)
     places = city.places
-    return jsonify([place.to_dict() for place in places])
+    places_list = []
+    for place in places:
+        places_list.append(place.to_dict())
+    return jsonify(places_list)
 
 
 # Retrieves a Place object. : GET /api/v1/places/<place_id>
@@ -47,7 +50,7 @@ def delete_place(place_id):
 @app_views.route("/cities/<city_id>/places",
                  methods=["POST"], strict_slashes=False)
 def create_place(city_id):
-    """Creates an object"""
+    """Creates an new object"""
     place_data = request.get_json()
     if not place_data:
         abort(400, "Not a JSON")
