@@ -10,17 +10,18 @@ from models import storage
 # create a route /status on the object app_views
 # that returns a JSON: "status": "OK"
 # curl -X GET http://0.0.0.0:5000/api/v1/status
-@app_views.route('/status', methods=['GET'])
+@app_views.route("/status", strict_slashes=False)
 def status():
     """ Returns a JSON: "status": "OK """
     return jsonify(status="OK")
 
 
 # create for task 5
-@app_views.route('/api/v1/stats', methods=['GET'])
+# curl -X GET http://0.0.0.0:5000/api/v1/stats
+@app_views.route("/stats", methods=["GET"], strict_slashes=False)
 def get_stats():
     """Retrieve the number of each objects by type"""
-    stats = {
+    dic = {
         "amenities": storage.count(Amenity),
         "cities": storage.count(City),
         "places": storage.count(Place),
@@ -30,5 +31,3 @@ def get_stats():
     }
     json_dict = json.dumps(dic, indent=2)
     return json_dict
-    
-
