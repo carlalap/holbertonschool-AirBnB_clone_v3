@@ -10,9 +10,11 @@ from models import storage
 # that returns a JSON: "status": "OK"
 # curl -X GET http://0.0.0.0:5000/api/v1/status
 @app_views.route('/status', methods=['GET'])
+
 def status():
     """ Returns a JSON: "status": "OK """
     return jsonify(status="OK")
+
 
 # create for task 5
 # @app_views.route('/api/v1/stats', methods=['GET'])
