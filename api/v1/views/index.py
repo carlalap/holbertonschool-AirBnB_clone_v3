@@ -12,9 +12,9 @@ from models import storage
 @app_views.route('/status', methods=['GET'])
 
 def status():
+   
     """ Returns a JSON: "status": "OK """
     return jsonify(status="OK")
-
 
 # create for task 5
 # @app_views.route('/api/v1/stats', methods=['GET'])
