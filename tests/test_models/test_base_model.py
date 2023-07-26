@@ -84,13 +84,15 @@ class TestBaseModel(unittest.TestCase):
         value."""
         tic = datetime.now()
         inst1 = BaseModel()
-        time.sleep(0.1)  # Introduce a small delay to ensure unique timestamps
         toc = datetime.now()
         self.assertTrue(tic <= inst1.created_at <= toc)
 
+        # Introduce a larger time delay (e.g., 1 second)
+        # to ensure unique timestamps
+        time.sleep(1)
+
         tic = datetime.now()
         inst2 = BaseModel()
-        time.sleep(0.1)  # Introduce a small delay to ensure unique timestamps
         toc = datetime.now()
         self.assertTrue(tic <= inst2.created_at <= toc)
 
